@@ -4,10 +4,10 @@ const links = [
   { href: '/#hero', label: 'Anasayfa' },
   { href: '/#services', label: 'Tedavi Yaklaşımlarımız' },
   { href: '/#conditions', label: 'Şikayetler' },
-  { href: '/#about', label: 'Kimdir?' },
+  { href: '/hakkimda', label: 'Hakkımda' },
   { href: '/#blog', label: 'Blog' },
   { href: '/#faq', label: 'SSS' },
-  { href: '/#contact', label: 'İletişim' },
+  { href: '/iletisim', label: 'İletişim' },
 ]
 
 const PhoneIcon = ({ size = 16 }) => (
