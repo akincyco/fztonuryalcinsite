@@ -36,11 +36,43 @@ function setCanonical(href) {
   el.setAttribute('href', href)
 }
 
+// Kimlikli bir JSON-LD <script> ekler/günceller; obj null ise kaldırır.
+function setJsonLd(id, obj) {
+  let el = document.getElementById(id)
+  if (!obj) {
+    if (el) el.remove()
+    return
+  }
+  if (!el) {
+    el = document.createElement('script')
+    el.type = 'application/ld+json'
+    el.id = id
+    document.head.appendChild(el)
+  }
+  el.textContent = JSON.stringify(obj)
+}
+
+function buildBreadcrumb(crumbs) {
+  if (!crumbs || crumbs.length === 0) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: c.url.startsWith('http') ? c.url : `${SITE_URL}${c.url}`,
+    })),
+  }
+}
+
 /**
- * Sayfa başına <title>, meta description, canonical ve Open Graph etiketlerini günceller.
- * SPA olduğu için her sayfa kendi SEO değerlerini set eder.
+ * Sayfa başına <title>, meta description, canonical, Open Graph ve (varsa) breadcrumb
+ * JSON-LD etiketlerini günceller. SPA olduğu için her sayfa kendi SEO değerlerini set eder.
+ * breadcrumbs: [{ name, url }] — url mutlak veya '/...' göreli olabilir.
  */
-export function useSeo({ title, description, canonical, ogType = 'website', image = DEFAULT_IMAGE }) {
+export function useSeo({ title, description, canonical, ogType = 'website', image = DEFAULT_IMAGE, breadcrumbs }) {
+  const crumbsKey = breadcrumbs ? JSON.stringify(breadcrumbs) : ''
   useEffect(() => {
     if (title) document.title = title
     setMetaTag('name', 'description', description)
@@ -54,5 +86,6 @@ export function useSeo({ title, description, canonical, ogType = 'website', imag
     setMetaTag('name', 'twitter:description', description)
     setMetaTag('name', 'twitter:image', image)
     setCanonical(canonical)
-  }, [title, description, canonical, ogType, image])
+    setJsonLd('ld-breadcrumb', buildBreadcrumb(breadcrumbs))
+  }, [title, description, canonical, ogType, image, crumbsKey])
 }

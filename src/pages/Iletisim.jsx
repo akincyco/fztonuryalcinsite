@@ -8,6 +8,10 @@ export default function Iletisim() {
     description:
       'Fizyoterapist Onur Yalçın kliniği iletişim ve randevu: Kozyatağı, Gülbahar Sk. Ege Yıldız Sitesi No:15, 34742 Kadıköy/İstanbul. Telefon +90 507 294 99 00.',
     canonical: `${SITE_URL}/iletisim`,
+    breadcrumbs: [
+      { name: 'Ana Sayfa', url: '/' },
+      { name: 'İletişim', url: '/iletisim' },
+    ],
   })
   return (
     <>

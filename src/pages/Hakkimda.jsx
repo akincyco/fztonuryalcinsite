@@ -8,6 +8,10 @@ export default function Hakkimda() {
     description:
       "İstanbul Üniversitesi Fizyoterapi ve Rehabilitasyon mezunu Fizyoterapist Onur Yalçın; Kadıköy Kozyatağı'nda bütüncül ve kaynak odaklı fizyoterapi ile manuel terapi uygular.",
     canonical: `${SITE_URL}/hakkimda`,
+    breadcrumbs: [
+      { name: 'Ana Sayfa', url: '/' },
+      { name: 'Hakkımda', url: '/hakkimda' },
+    ],
   })
   return (
     <>

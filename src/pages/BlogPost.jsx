@@ -22,6 +22,13 @@ export default function BlogPost() {
       : 'Aradığınız blog yazısı bulunamadı.',
     canonical: `${SITE_URL}/blog/${id}`,
     ogType: 'article',
+    breadcrumbs: post
+      ? [
+          { name: 'Ana Sayfa', url: '/' },
+          { name: 'Blog', url: '/#blog' },
+          { name: post.title, url: `/blog/${post.id}` },
+        ]
+      : undefined,
   })
 
   useEffect(() => {

@@ -16,6 +16,13 @@ export default function KategoriPage() {
       : 'Kategori bulunamadı | Fizyoterapist Onur Yalçın',
     description: cat ? cat.intro : 'Aradığınız hizmet kategorisi bulunamadı.',
     canonical: `${SITE_URL}/tedavi-yaklasimlarimiz/${slug}`,
+    breadcrumbs: cat
+      ? [
+          { name: 'Ana Sayfa', url: '/' },
+          { name: 'Tedavi Yaklaşımlarımız', url: '/tedavi-yaklasimlarimiz' },
+          { name: cat.name, url: `/tedavi-yaklasimlarimiz/${cat.slug}` },
+        ]
+      : undefined,
   })
 
   useEffect(() => {

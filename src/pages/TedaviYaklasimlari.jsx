@@ -10,6 +10,10 @@ export default function TedaviYaklasimlari() {
     description:
       "Kadıköy Kozyatağı'nda manuel terapi, Schroth ile skolyoz, pelvik taban, TME (çene eklemi), klinik pilates ve nörolojik/ortopedik rehabilitasyon dahil fizyoterapi hizmet kategorilerimiz. Fizyoterapist Onur Yalçın.",
     canonical: `${SITE_URL}/tedavi-yaklasimlarimiz`,
+    breadcrumbs: [
+      { name: 'Ana Sayfa', url: '/' },
+      { name: 'Tedavi Yaklaşımlarımız', url: '/tedavi-yaklasimlarimiz' },
+    ],
   })
 
   return (
