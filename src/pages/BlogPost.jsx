@@ -5,10 +5,22 @@ import remarkGfm from 'remark-gfm'
 import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import { getPostById, blogPosts } from '../data/blogPosts.js'
+import { useSeo, SITE_URL } from '../hooks/useSeo.js'
 
 export default function BlogPost() {
   const { id } = useParams()
   const post = getPostById(id)
+
+  useSeo({
+    title: post
+      ? `${post.title} | Fizyoterapist Onur Yalçın – Kadıköy Kozyatağı`
+      : 'Yazı bulunamadı | Fizyoterapist Onur Yalçın',
+    description: post
+      ? `${post.excerpt} Kadıköy Kozyatağı fizyoterapist Onur Yalçın.`
+      : 'Aradığınız blog yazısı bulunamadı.',
+    canonical: `${SITE_URL}/blog/${id}`,
+    ogType: 'article',
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
