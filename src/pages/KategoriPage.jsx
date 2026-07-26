@@ -10,6 +10,27 @@ export default function KategoriPage() {
   const { slug } = useParams()
   const cat = getCategoryBySlug(slug)
 
+  const itemList = cat
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: `${LOCATION.district} ${cat.name} Hizmetleri`,
+        numberOfItems: cat.services.length,
+        itemListElement: cat.services.map((s, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'Service',
+            name: s.name,
+            description: s.description,
+            provider: { '@id': `${SITE_URL}/#clinic` },
+            areaServed: LOCATION.district,
+            ...(s.blog ? { url: `${SITE_URL}/blog/${s.blog}` } : {}),
+          },
+        })),
+      }
+    : null
+
   useSeo({
     title: cat
       ? `${LOCATION.district} ${cat.name} | ${LOCATION.neighborhood} – ${BRAND}`
@@ -23,6 +44,7 @@ export default function KategoriPage() {
           { name: cat.name, url: `/tedavi-yaklasimlarimiz/${cat.slug}` },
         ]
       : undefined,
+    jsonLd: itemList,
   })
 
   useEffect(() => {

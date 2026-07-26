@@ -71,8 +71,9 @@ function buildBreadcrumb(crumbs) {
  * JSON-LD etiketlerini günceller. SPA olduğu için her sayfa kendi SEO değerlerini set eder.
  * breadcrumbs: [{ name, url }] — url mutlak veya '/...' göreli olabilir.
  */
-export function useSeo({ title, description, canonical, ogType = 'website', image = DEFAULT_IMAGE, breadcrumbs }) {
+export function useSeo({ title, description, canonical, ogType = 'website', image = DEFAULT_IMAGE, breadcrumbs, jsonLd }) {
   const crumbsKey = breadcrumbs ? JSON.stringify(breadcrumbs) : ''
+  const ldKey = jsonLd ? JSON.stringify(jsonLd) : ''
   useEffect(() => {
     if (title) document.title = title
     setMetaTag('name', 'description', description)
@@ -87,5 +88,6 @@ export function useSeo({ title, description, canonical, ogType = 'website', imag
     setMetaTag('name', 'twitter:image', image)
     setCanonical(canonical)
     setJsonLd('ld-breadcrumb', buildBreadcrumb(breadcrumbs))
-  }, [title, description, canonical, ogType, image, crumbsKey])
+    setJsonLd('ld-page', jsonLd || null)
+  }, [title, description, canonical, ogType, image, crumbsKey, ldKey])
 }
