@@ -3,3 +3,6 @@ dist
 .DS_Store
 *.local
 .vite
+
+# Üretilen sitemap (prebuild ile oluşturulur)
+public/sitemap.xml
