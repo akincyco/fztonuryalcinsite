@@ -5,7 +5,7 @@ import { useSectionNav } from '../hooks/useSectionNav.js'
 // section: ana sayfada yumuşak kaydırma | to: ayrı sayfa (router)
 const links = [
   { section: 'hero', label: 'Anasayfa' },
-  { section: 'services', label: 'Tedavi Yaklaşımlarımız' },
+  { to: '/tedavi-yaklasimlarimiz', label: 'Tedavi Yaklaşımlarımız' },
   { section: 'conditions', label: 'Şikayetler' },
   { to: '/hakkimda', label: 'Hakkımda' },
   { section: 'blog', label: 'Blog' },
