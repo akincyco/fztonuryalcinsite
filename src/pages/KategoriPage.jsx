@@ -11,7 +11,7 @@ export default function KategoriPage() {
 
   useSeo({
     title: cat
-      ? `${cat.name} | Kadıköy Kozyatağı – Fizyoterapist Onur Yalçın`
+      ? `Kadıköy ${cat.name} | Kozyatağı – Fizyoterapist Onur Yalçın`
       : 'Kategori bulunamadı | Fizyoterapist Onur Yalçın',
     description: cat ? cat.intro : 'Aradığınız hizmet kategorisi bulunamadı.',
     canonical: `${SITE_URL}/tedavi-yaklasimlarimiz/${slug}`,
