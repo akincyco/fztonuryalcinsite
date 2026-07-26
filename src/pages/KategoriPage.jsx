@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import { useSeo, SITE_URL } from '../hooks/useSeo.js'
 import { getCategoryBySlug, serviceCategories } from '../data/services.js'
+import { LOCATION, BRAND } from '../config/site.js'
 
 export default function KategoriPage() {
   const { slug } = useParams()
@@ -11,7 +12,7 @@ export default function KategoriPage() {
 
   useSeo({
     title: cat
-      ? `Kadıköy ${cat.name} | Kozyatağı – Fizyoterapist Onur Yalçın`
+      ? `${LOCATION.district} ${cat.name} | ${LOCATION.neighborhood} – ${BRAND}`
       : 'Kategori bulunamadı | Fizyoterapist Onur Yalçın',
     description: cat ? cat.intro : 'Aradığınız hizmet kategorisi bulunamadı.',
     canonical: `${SITE_URL}/tedavi-yaklasimlarimiz/${slug}`,
@@ -58,7 +59,7 @@ export default function KategoriPage() {
               <span style={{ color: '#fff' }}>{cat.name}</span>
             </nav>
             <h1 style={{ color: '#fff', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 800, lineHeight: 1.2 }}>
-              {cat.name}
+              {LOCATION.district} {cat.name}
             </h1>
             <p style={{ marginTop: '1.25rem', fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(255,255,255,0.85)' }}>
               {cat.intro}
