@@ -46,10 +46,11 @@ export default function Navbar() {
         width: '100%',
         zIndex: 1000,
         transition: 'var(--transition)',
-        padding: scrolled ? '1rem 0' : '1.5rem 0',
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-        boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
+        padding: scrolled ? '0.75rem 0' : '1rem 0',
+        backgroundColor: 'rgba(255, 255, 255, 0.97)',
+        boxShadow: 'var(--shadow-sm)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -61,7 +62,7 @@ export default function Navbar() {
           <ul style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', margin: 0 }}>
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} style={{ fontWeight: 500, transition: 'color 0.3s' }}>{l.label}</a>
+                <a href={l.href} style={{ fontWeight: 500, color: 'var(--primary)', transition: 'color 0.3s' }}>{l.label}</a>
               </li>
             ))}
             <li>
