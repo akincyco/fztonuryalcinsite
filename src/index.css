@@ -192,3 +192,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .blog-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 .blog-content blockquote { border-left: 4px solid var(--secondary); margin: 1.5rem 0; padding: .5rem 1.25rem; background: var(--surface); color: var(--text-light); font-style: italic; border-radius: 0 var(--radius) var(--radius) 0; }
 .blog-content em { color: var(--text-light); }
+
+/* Nav'dan bölüme kaydırırken sabit navbar'ın altında kalmasın diye offset */
+section[id] { scroll-margin-top: 90px; }

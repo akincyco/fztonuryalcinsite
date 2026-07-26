@@ -6,10 +6,12 @@ import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
 import { getPostById, blogPosts } from '../data/blogPosts.js'
 import { useSeo, SITE_URL } from '../hooks/useSeo.js'
+import { useSectionNav } from '../hooks/useSectionNav.js'
 
 export default function BlogPost() {
   const { id } = useParams()
   const post = getPostById(id)
+  const goToSection = useSectionNav()
 
   useSeo({
     title: post
@@ -55,9 +57,9 @@ export default function BlogPost() {
         }}
       >
         <div className="container" style={{ maxWidth: 820 }}>
-          <Link to="/#blog" style={{ color: 'var(--secondary)', fontWeight: 600, fontSize: '.95rem' }}>
+          <a href="/" onClick={(e) => goToSection('blog', e)} style={{ color: 'var(--secondary)', fontWeight: 600, fontSize: '.95rem', cursor: 'pointer' }}>
             ← Tüm Yazılar
-          </Link>
+          </a>
           <span
             style={{
               display: 'inline-block',

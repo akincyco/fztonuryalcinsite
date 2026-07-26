@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useSectionNav } from '../hooks/useSectionNav.js'
 
+// section: ana sayfada yumuşak kaydırma | to: ayrı sayfa (router)
 const links = [
-  { href: '/#hero', label: 'Anasayfa' },
-  { href: '/#services', label: 'Tedavi Yaklaşımlarımız' },
-  { href: '/#conditions', label: 'Şikayetler' },
-  { href: '/hakkimda', label: 'Hakkımda' },
-  { href: '/#blog', label: 'Blog' },
-  { href: '/#faq', label: 'SSS' },
-  { href: '/iletisim', label: 'İletişim' },
+  { section: 'hero', label: 'Anasayfa' },
+  { section: 'services', label: 'Tedavi Yaklaşımlarımız' },
+  { section: 'conditions', label: 'Şikayetler' },
+  { to: '/hakkimda', label: 'Hakkımda' },
+  { section: 'blog', label: 'Blog' },
+  { section: 'faq', label: 'SSS' },
+  { to: '/iletisim', label: 'İletişim' },
 ]
 
 const PhoneIcon = ({ size = 16 }) => (
@@ -28,15 +31,28 @@ const CloseIcon = () => (
   </svg>
 )
 
+const linkStyle = { fontWeight: 500, color: 'var(--primary)', transition: 'color 0.3s' }
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const goToSection = useSectionNav()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const close = () => setOpen(false)
+
+  // Bir nav linkini uygun elemana çevirir (bölüm = yumuşak kaydırma, sayfa = Link)
+  const renderLink = (l, style) =>
+    l.to ? (
+      <Link to={l.to} style={style} onClick={close}>{l.label}</Link>
+    ) : (
+      <a href="/" style={style} onClick={(e) => { goToSection(l.section, e); close() }}>{l.label}</a>
+    )
 
   return (
     <nav
@@ -54,16 +70,14 @@ export default function Navbar() {
       }}
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="#" style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--secondary)', whiteSpace: 'nowrap', marginRight: '2rem' }}>
+        <a href="/" style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--secondary)', whiteSpace: 'nowrap', marginRight: '2rem' }} onClick={(e) => { goToSection('hero', e); close() }}>
           Fizyoterapist Onur Yalçın
         </a>
 
         <div className="nav-desktop" style={{ display: 'none' }}>
           <ul style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', margin: 0 }}>
             {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} style={{ fontWeight: 500, color: 'var(--primary)', transition: 'color 0.3s' }}>{l.label}</a>
-              </li>
+              <li key={l.label}>{renderLink(l, linkStyle)}</li>
             ))}
             <li>
               <a href="tel:+905072949900" className="btn btn-primary" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', padding: '0.5rem 1.25rem', fontSize: '0.9rem' }}>
@@ -80,13 +94,11 @@ export default function Navbar() {
 
       <div
         className="mobile-menu"
-        style={{ top: scrolled ? '70px' : '80px', transform: open ? 'translateY(0)' : 'translateY(-150%)' }}
+        style={{ top: scrolled ? '66px' : '76px', transform: open ? 'translateY(0)' : 'translateY(-150%)' }}
       >
         <ul>
           {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
-            </li>
+            <li key={l.label}>{renderLink(l)}</li>
           ))}
           <li>
             <a href="tel:+905072949900" className="btn btn-primary" style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
