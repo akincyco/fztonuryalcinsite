@@ -1,8 +1,10 @@
-// Tedavi yaklaşımları / hizmetler — GBP işletme kategorilerine göre gruplu.
-// Kaynak: sitenin LocalBusiness schema OfferCatalog verisi. `blog` alanı ilgili blog yazısına linkler (hub->spoke).
+// Tedavi yaklaşımları — GBP işletme kategorilerine göre gruplu (hub-and-spoke).
+// Her kategorinin kendi sayfası: /tedavi-yaklasimlarimiz/<slug>. `blog` alanı ilgili yazıya linkler.
 export const serviceCategories = [
   {
     "name": "Fizik Tedavi Kliniği",
+    "slug": "fizik-tedavi-klinigi",
+    "intro": "Kadıköy Kozyatağı'ndaki kliniğimizde boyun ve bel ağrısından postür bozukluklarına, TME'den spor kaynaklı şikayetlere kadar kas-iskelet sistemi sorunlarında; değerlendirme sonrası kişiye özel fizyoterapi uyguluyoruz.",
     "services": [
       {
         "name": "Bütüncül Fizyoterapi ve Manuel Terapi",
@@ -92,6 +94,8 @@ export const serviceCategories = [
   },
   {
     "name": "Rehabilitasyon Merkezi",
+    "slug": "rehabilitasyon-merkezi",
+    "intro": "Ameliyat sonrası, ortopedik ve nörolojik rehabilitasyondan spor yaralanmalarına kadar; hareket, kuvvet ve fonksiyon kazanımına yönelik kişiye özel rehabilitasyon programları.",
     "services": [
       {
         "name": "Ameliyat Sonrası Rehabilitasyon",
@@ -174,6 +178,8 @@ export const serviceCategories = [
   },
   {
     "name": "Fizik Tedavi Uzmanı",
+    "slug": "fizik-tedavi-uzmani",
+    "intro": "Ayrıntılı değerlendirme sonrası manuel terapi, fasyal ve visseral manipülasyon, egzersiz terapisi ve kronik ağrı yönetimi gibi uygulamalarla ağrının kaynağına yöneliyoruz.",
     "services": [
       {
         "name": "Fizyoterapi Değerlendirme ve Muayene",
@@ -239,6 +245,8 @@ export const serviceCategories = [
   },
   {
     "name": "Pilates Salonu",
+    "slug": "pilates-salonu",
+    "intro": "Fizyoterapist kontrolünde, değerlendirmeye dayalı klinik pilates ve reformer programlarıyla postür, gövde (core) kuvveti ve omurga sağlığını destekliyoruz.",
     "services": [
       {
         "name": "Klinik Pilates",
@@ -262,6 +270,8 @@ export const serviceCategories = [
   },
   {
     "name": "Spor Masaj Terapisti",
+    "slug": "spor-masaj-terapisti",
+    "intro": "Antrenman öncesi ve sonrası hazırlık ile toparlanma, kronik kas gerginliği ve dolaşım için spor masajı ve derin doku uygulamaları.",
     "services": [
       {
         "name": "Spor Masajı",
@@ -279,6 +289,8 @@ export const serviceCategories = [
   },
   {
     "name": "Yoga Stüdyosu",
+    "slug": "yoga-studyosu",
+    "intro": "Nörogelişimsel yaklaşımla beden farkındalığı, esneklik ve nefes çalışmalarını destekleyen yoga ve germe programları.",
     "services": [
       {
         "name": "Nörogelişimsel Yoga",
@@ -292,3 +304,5 @@ export const serviceCategories = [
     ]
   }
 ];
+
+export const getCategoryBySlug = (s) => serviceCategories.find((c) => c.slug === s);
