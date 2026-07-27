@@ -6,3 +6,7 @@ dist
 
 # Üretilen sitemap (prebuild ile oluşturulur)
 public/sitemap.xml
+
+# Local Netlify folder
+.netlify
+.vercel
