@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "fztonuryalcin-site",
+  "compatibility_date": "2026-07-28",
+  "assets": {
+    // Vite build çıktısı
+    "directory": "./dist",
+    // React Router (SPA): bilinmeyen yollar index.html'e düşer,
+    // /tedavi-yaklasimlarimiz/pilates-salonu gibi derin rotalar 200 döner
+    "not_found_handling": "single-page-application"
+  }
+}
