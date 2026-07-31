@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "fztonuryalcin-site",
+  // Müşterinin kendi Cloudflare hesabı (Fztonuryalcin@gmail.com's Account).
+  // Açıkça yazılmazsa wrangler iki hesap arasında kayabiliyor.
+  "account_id": "095977b82719e2246e277846b425352f",
   "compatibility_date": "2026-07-28",
   "assets": {
     // Vite build çıktısı
@@ -8,5 +11,11 @@
     // React Router (SPA): bilinmeyen yollar index.html'e düşer,
     // /tedavi-yaklasimlarimiz/pilates-salonu gibi derin rotalar 200 döner
     "not_found_handling": "single-page-application"
-  }
+  },
+  // Custom domain yerine zone route: proxy'li DNS kaydında origin'e gitmeden
+  // devreye girer, bu yüzden DNS kaydı değiştirmeden geçiş yapılabiliyor.
+  "routes": [
+    { "pattern": "fztonuryalcin.com/*", "zone_name": "fztonuryalcin.com" },
+    { "pattern": "www.fztonuryalcin.com/*", "zone_name": "fztonuryalcin.com" }
+  ]
 }
